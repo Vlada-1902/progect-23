@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Галерея</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            padding: 50px;
+        }
+        #gallery-image {
+            width: 400px;
+            border: 3px solid #333;
+            border-radius: 10px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #counter {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Моя Галерея 🖼️</h1>
+    
+    <img id="gallery-image" src="img/dogs.jpg" alt="image">
+    
+    <br>
+    
+    <button id="btn-prev">⬅️ Назад</button>
+    <button id="btn-random">🎲 Випадкова</button>
+    <button id="btn-next">Вперед ➡️</button>
+
+    <div id="counter"></div>
+
+    
+    <script>
+        let images=[
+            "dogs.jpg",
+            "palms.jpg",
+            "flower.jpg",
+            "rome.jpg"
+        ];
+        let currentIndex=0;
+        let img=document.getElementById("gallery-image");
+        let btnNext=document.getElementById("btn-next");
+        let btnPrev=document.getElementById("btn-prev");
+        let btnRandom=document.getElementById("btn-random")
+        let counter=document.getElementById("counter");
+        counter.textContent="Картинка 1 з "+images.length;
+        btnNext.addEventListener("click",function(){
+            currentIndex=currentIndex+1;
+            if(currentIndex>=images.length){
+                currentIndex=0;
+            }
+            img.src="img/"+images[currentIndex];
+            counter.textContent="Картинка "+(currentIndex+1)+" з "+images.length;
+        });
+        btnPrev.addEventListener("click",function(){
+            currentIndex=currentIndex-1;
+            if(currentIndex<0){
+                currentIndex=images.length-1;
+            }
+            img.src="img/"+images[currentIndex];
+            counter.textContent="Картинка "+(currentIndex+1)+" з "+images.length;
+        });
+        btnRandom.addEventListener("click",function(){
+            currentIndex=Math.floor(Math.random()*images.length);
+            img.src="img/"+images[currentIndex];
+            counter.textContent="Картинка "+(currentIndex+1)+" з "+images.length;
+        });
+    </script>
+</body>
+</html>
